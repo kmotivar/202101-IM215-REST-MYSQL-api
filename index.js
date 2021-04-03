@@ -38,8 +38,9 @@ app.get('/', (request, response) => {
     // Route
     // this is different...use
     // app.get('/:first_name/:last_name/:age', (request, response) => {
+    //         console.log("route parameters")
     //         console.log(request.params)
-    //          response.end()
+    //         response.end()
     //     })
 
     // Body 
@@ -55,6 +56,21 @@ app.get('/', (request, response) => {
 //             console.log(request.params)
 //             response.end()
 //         })
+
+//all together
+// app.get('/id/:user', (request, response) => {
+
+//     console.log('Body parameters')
+//     console.log(request.body)
+
+//     console.log("Query parameters")
+//     console.log(request.query)
+
+//     console.log("route parameters")
+//     console.log(request.params)
+//     response.end()
+// })
+
 
 app.listen(3333, () => {
     console.log("The server is up and listening on port 3333")
