@@ -7,9 +7,10 @@
   "author": "kmotivar <kmotivar@confederationcollege.ca>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
   },
   "scripts": {
-    "dev": "node index.js"
+    "dev": "nodemon index.js"
   }
 }
