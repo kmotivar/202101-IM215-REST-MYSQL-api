@@ -1,7 +1,18 @@
 const express = require('express')
 const router = express.Router()
 
-module.exports = router
+const mysql = require('mysql')
+
+function getNewConnection() {
+    return mysql.createConnection({
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: 'password',
+    database: '202101-IM215-REST',
+    })
+}
+
 
 const users = [
     {first_name : 'Keval', last_name: 'Doe', age: 23},
@@ -10,15 +21,38 @@ const users = [
 ]
 
 router.get('/user', (request, response) => {
-    response.json(users)
-    // response.status(501).json({
-    //     msg: 'Not implemented',
-    //     type: 'custom-alert'
-    // })
-    //or
-    // response.sendStatus(501);
-    //or
-    // response.status(501).end()
+    
+    const connection = getNewConnection();
+    const queryString = 'Select * FROM user'
+    
+    connection.query(queryString, (err, rows, fields) => {
+        if (err != null) {
+            console.error(err)
+            response.sendStatus(500);
+        } else{
+            response.json(rows);
+        }
+    })
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // response.json(users)
+    // // response.status(501).json({
+    // //     msg: 'Not implemented',
+    // //     type: 'custom-alert'
+    // // })
+    // //or
+    // // response.sendStatus(501);
+    // //or
+    // // response.status(501).end()
 
 })
 
@@ -45,3 +79,5 @@ router.delete('/user/:id', (request, response) => {
     response.end()
     
 })
+
+module.exports = router
