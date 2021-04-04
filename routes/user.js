@@ -14,11 +14,12 @@ function getNewConnection() {
 }
 
 
-const users = [
-    {first_name : 'Keval', last_name: 'Doe', age: 23},
-    {first_name : 'Doe', last_name: 'Doe', age: 48},
+// const users = [
+//     {first_name : 'Keval', last_name: 'Doe', age: 23},
+//     {first_name : 'Doe', last_name: 'Doe', age: 48},
+// ]
 
-]
+
 
 router.get('/user', (request, response) => {
     
