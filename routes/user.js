@@ -11,6 +11,14 @@ const users = [
 
 router.get('/user', (request, response) => {
     response.json(users)
+    // response.status(501).json({
+    //     msg: 'Not implemented',
+    //     type: 'custom-alert'
+    // })
+    //or
+    // response.sendStatus(501);
+    //or
+    // response.status(501).end()
 
 })
 
