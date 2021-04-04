@@ -57,9 +57,23 @@ router.get('/user', (request, response) => {
 router.get('/user/:id', (request, response) => {
     console.log(request.params)
     const {id} = request.params
-    response.json(users[id])
+    
+    const connection = getNewConnection();
+    const queryString = `Select * FROM user WHERE id = ${id}`
+    
+    connection.query(queryString, (err, rows, fields) => {
+        if (err != null) {
+            console.error(err)
+            response.sendStatus(500);
+        } else{
+            response.json(rows[0]);
+        }
+    })
+
+    //response.json(users[id])
     
 })
+
 
 router.post('/user', (request, response) => {
 
