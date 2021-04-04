@@ -40,9 +40,7 @@ router.get('/user', (request, response) => {
     
     
     
-    
-    
-    
+
     
     // response.json(users)
     // // response.status(501).json({
@@ -64,10 +62,26 @@ router.get('/user/:id', (request, response) => {
 })
 
 router.post('/user', (request, response) => {
-    console.log(request.body)
+
     const {first_name, last_name, age} = request.body
-    users.push({first_name, last_name, age})
-    response.end()
+    const queryString = `INSERT INTO user VALUES (NULL,  '${first_name}', '${last_name}', ${age} )`
+
+    const connection = getNewConnection()
+    connection.query(queryString, (err, result, fields) => {
+        console.log('Got a response from DB server')
+        if (err!= null) {
+            console.error(err)
+            response.sendStatus(500);
+        } else {
+            console.log(result)
+            response.json({id: result.insertId})
+        }
+    })
+    
+    // console.log(request.body)
+    // const {first_name, last_name, age} = request.body
+    // users.push({first_name, last_name, age})
+    // response.end()
     
 })
 
