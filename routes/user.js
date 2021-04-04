@@ -55,7 +55,7 @@ router.get('/user', (request, response) => {
 })
 
 router.get('/user/:id', (request, response) => {
-    console.log(request.params)
+    //console.log(request.params)
     const {id} = request.params
     
     const connection = getNewConnection();
@@ -100,11 +100,26 @@ router.post('/user', (request, response) => {
 })
 
 router.delete('/user/:id', (request, response) => {
-    console.log(request.params)
     const {id} = request.params
-    users.splice(id,1)
-    // response.json(users[id])
-    response.end()
+
+    
+    const connection = getNewConnection();
+    const queryString = `Delete FROM user WHERE id = ${id}`
+    
+    connection.query(queryString, (err, result, fields) => {
+        if (err != null) {
+            console.error(err)
+            response.sendStatus(500);
+        } else{
+            console.log(result)
+            response.end()
+            // response.json(result[0]);
+        }
+    })
+
+    // users.splice(id,1)
+    // // response.json(users[id])
+    // response.end()
     
 })
 
